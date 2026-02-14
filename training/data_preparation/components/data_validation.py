@@ -207,11 +207,18 @@ class DataValidation:
                 Logger().log(f"Data validation failed due to missing features: {feature_report}", level="error")
                 raise CustomException(f"Data validation failed due to missing features: {feature_report}", sys)
 
-            # If all validations pass, create the artifact
+
+
+            # If all validations pass, save the validated data to the validated directory
+            validated_data_path = self.data_validation_config.validated_data_path
+            os.makedirs(os.path.dirname(validated_data_path), exist_ok=True)
+            df.to_parquet(validated_data_path, index=False)
+
+            # Create the artifact
             data_validation_artifact = DataValidationArtifact(
                 valid_status=status,
-                valid_data_path=self.data_validation_config.valid_data_path,
-                invalid_data_path=self.data_validation_config.invalid_data_path,
+                validated_data_path=self.data_validation_config.validated_data_path,
+                invalidated_data_path=self.data_validation_config.invalidated_data_path,
                 drift_report_file_path=self.data_validation_config.drift_report_file_path
             )
 

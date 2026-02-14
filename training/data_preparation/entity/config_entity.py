@@ -33,13 +33,29 @@ class DataValidationConfig:
         self.data_validation_dir: str = os.path.join(
             preparation_pipeline_config.artifact_dir, DATA_VALIDATION_DIR_NAME
         )
-        self.valid_data_path: str = os.path.join(
+        self.validated_data_path: str = os.path.join(
             self.data_validation_dir, DATA_VALIDATION_VALID_DIR, FILE_NAME
         )
-        self.invalid_data_path: str = os.path.join(
+        self.invalidated_data_path: str = os.path.join(
             self.data_validation_dir, DATA_VALIDATION_INVALID_DIR, FILE_NAME
         )
         self.drift_report_file_path: str = os.path.join(
             self.data_validation_dir, DATA_VALIDATION_DRIFT_REPORT_DIR, DATA_VALIDATION_REPORT_FILE_NAME
         )
     
+
+class DataTransformationConfig:
+    def __init__(self, preparation_pipeline_config:PreparationPipelineConfig):
+        self.data_transformation_dir: str = os.path.join(
+            preparation_pipeline_config.artifact_dir, DATA_TRANSFORMATION_DIR_NAME
+        )
+        self.transformed_data_dir: str = os.path.join(
+            self.data_transformation_dir, DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR
+        )
+        self.transformed_data_file_path: str = os.path.join(
+            self.transformed_data_dir, DATA_TRANSFORMATION_TRANSFORMED_DATA_FILE_NAME
+        )
+        self.transformed_object_dir: str = os.path.join(
+            self.data_transformation_dir, DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR
+        )
+        
