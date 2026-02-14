@@ -1,0 +1,46 @@
+columns:
+  - video_id
+  - video_published_at
+  - video_trending__date
+  - video_trending_country
+  - channel_id
+  - video_title
+  - video_description
+  - video_default_thumbnail
+  - video_category_id
+  - video_tags
+  - video_duration
+  - video_dimension
+  - video_definition
+  - video_licensed_content
+  - video_view_count
+  - video_like_count
+  - video_comment_count
+  - channel_title
+  - channel_description
+  - channel_custom_url
+  - channel_published_at
+  - channel_country
+  - channel_view_count
+  - channel_subscriber_count
+  - channel_have_hidden_subscribers
+  - channel_video_count
+  - channel_localized_title
+  - channel_localized_description
+
+numeric_columns:
+  - video_view_count
+  - video_like_count
+  - video_comment_count
+  - channel_view_count
+  - channel_subscriber_count
+  - channel_video_count
+
+categorical_columns:
+  - video_trending_country
+  - video_category_id
+  - video_dimension
+  - video_definition
+  - video_licensed_content
+  - channel_country
+  - channel_have_hidden_subscribers

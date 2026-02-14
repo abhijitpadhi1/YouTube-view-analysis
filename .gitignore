@@ -56,9 +56,15 @@ cover/
 *.mo
 *.pot
 
-# Django stuff:
+# Archives and Artifacts:
+logs/
 *.log
+report.yaml
 local_settings.py
+Artifacts/
+*.zip
+*.tar.gz
+*.parquet
 db.sqlite3
 db.sqlite3-journal
 
