@@ -7,7 +7,7 @@ from training.exception.exception import CustomException
 from training.logging.logger import Logger
 # Import component module
 from training.data_preparation.pipeline.preparation_pipeline import PreparationPipeline
-from training.ml.model_components.feature_impact.components.feature_impact_pipeline import FeatureImpactModelTrainingPipeline
+from training.ml.model_components.feature_impact.pipeline.feature_impact_pipeline import FeatureImpactModelTrainingPipeline
 
 
 def main():
