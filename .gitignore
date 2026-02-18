@@ -62,6 +62,8 @@ logs/
 report.yaml
 local_settings.py
 Artifacts/
+artifact/
+artifact/*
 *.zip
 *.tar.gz
 *.parquet

@@ -1,0 +1,71 @@
+columns:
+    # numeric
+  - duration_seconds
+  - publish_hour
+  - publish_day_of_week
+  - hours_to_trend
+  - channel_age_days
+  - channel_subscriber_count
+  - channel_video_count
+  - likes_per_1k_views
+  - comments_per_1k_views
+  - engagement_score
+  - video_view_count
+
+    # flags
+  - likes_missing_flag
+  - comments_missing_flag
+  - is_weekend
+  - same_country_flag
+
+    # categorical
+  - video_category_id
+  - duration_bucket
+  - channel_subscriber_bucket
+  - video_trending_country
+
+
+numeric_columns:
+  - duration_seconds
+  - publish_hour
+  - publish_day_of_week
+  - hours_to_trend
+  - channel_age_days
+  - channel_subscriber_count
+  - channel_video_count
+  - likes_per_1k_views
+  - comments_per_1k_views
+  - engagement_score
+  - video_view_count
+
+categorical_columns:
+  - video_category_id
+  - duration_bucket
+  - channel_subscriber_bucket
+  - video_trending_country
+
+flag_columns:
+  - likes_missing_flag
+  - comments_missing_flag
+  - is_weekend
+  - same_country_flag
+
+structural_columns:
+  - video_view_count
+  - duration_seconds
+  - publish_hour
+  - publish_day_of_week
+  - hours_to_trend
+  - channel_age_days
+  - channel_subscriber_count
+  - channel_video_count
+  - is_weekend
+  - same_country_flag
+  - video_category_id
+  - duration_bucket
+  - channel_subscriber_bucket
+  - video_trending_country
+
+target_column:
+  - log_view_count
+

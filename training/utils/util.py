@@ -70,3 +70,23 @@ def save_object(file_path: str, obj: object) -> None:
         err = CustomException(str(e), sys)
         Logger().log(f"Error in save_object: {err}", level="error")
         raise err
+    
+
+def load_object(file_path: str) -> object:
+    """
+    Loads a Python object from a file using pickle.
+
+    Args:
+        file_path (str): The path to the file from which the object will be loaded.
+
+    Returns:
+        object: The Python object loaded from the file.
+    """
+    try:
+        Logger().log(f"Loading object from file at: {file_path}")
+        with open(file_path, 'rb') as file:
+            return pickle.load(file)
+    except Exception as e:
+        err = CustomException(str(e), sys)
+        Logger().log(f"Error in load_object: {err}", level="error")
+        raise err
