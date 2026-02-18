@@ -1,4 +1,5 @@
 import os, sys
+from matplotlib.pylab import geometric
 import pandas as pd
 import mlflow
 import dagshub
@@ -51,15 +52,16 @@ class ModelTrainer:
             Logger().log(f"Error in ModelTrainer __init__: {err}", level='error')
 
 
-    def track_mlflow(self, model, rf_metric, model_path) -> None:
+    def track_mlflow(self, model_name, model, model_metric, model_path) -> None:
         try:
             with mlflow.start_run():
-                rf_train_score = rf_metric['train_score']
-                rf_test_score = rf_metric['test_score']
-                mlflow.log_metric("rf_train_score", rf_train_score)
-                mlflow.log_metric("rf_test_score", rf_test_score)
-                # mlflow.sklearn.log_model(model, "model")
-                mlflow.log_artifact(model_path, artifact_path="rf_model")
+                if model_name == "RandomForest":
+                    rf_train_score = model_metric['train_score']
+                    rf_test_score = model_metric['test_score']
+                    mlflow.log_metric("rf_train_score", rf_train_score)
+                    mlflow.log_metric("rf_test_score", rf_test_score)
+                    # mlflow.sklearn.log_model(model, "model")
+                    mlflow.log_artifact(model_path, artifact_path="rf_model")
 
         except Exception as e:
             err = CustomException(str(e), sys)
@@ -88,9 +90,22 @@ class ModelTrainer:
             # Train the model on the training data
             rf_model.fit(X_train, y_train)
 
+            # Save the trained model to the specified file path
+            model_path = self.model_trainer_config.trained_rf_model_file_path
+            save_object(file_path=model_path, obj=rf_model)
+            Logger().log(f"Trained Random Forest model saved at: {model_path}")
+            
             # Find the training score and test score
             train_score = rf_model.score(X_train, y_train)
             test_score = rf_model.score(X_test, y_test)
+
+            # Track with mlflow
+            rf_metric = {
+                "train_score": train_score,
+                "test_score": test_score
+            }
+            self.track_mlflow("RandomForest", rf_model, rf_metric, self.model_trainer_config.trained_rf_model_file_path)
+
             Logger().log(f"Random Forest training score: {train_score}")
             Logger().log(f"Random Forest test score: {test_score}")
 
@@ -104,10 +119,6 @@ class ModelTrainer:
                 feature_importances=feture_importance.tolist()
             )
 
-            # Save the trained model to the specified file path
-            model_path = self.model_trainer_config.trained_rf_model_file_path
-            save_object(file_path=model_path, obj=rf_model)
-            Logger().log(f"Trained Random Forest model saved at: {model_path}")
 
             # Save the trained model to the model registry directory for serving
             model_registry_path = os.path.join(MODEL_REGISTRY_ML_FEATURE_IMPACT_MODEL, MODEL_TRAINING_TRAINED_RF_MODEL_FILE_NAME)
