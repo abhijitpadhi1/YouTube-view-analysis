@@ -60,7 +60,7 @@ class ModelTrainer:
                     rf_test_score = model_metric['test_score']
                     mlflow.log_metric("rf_train_score", rf_train_score)
                     mlflow.log_metric("rf_test_score", rf_test_score)
-                    # mlflow.sklearn.log_model(model, "model")
+                    mlflow.sklearn.log_model(model, "model")
                     mlflow.log_artifact(model_path, artifact_path="rf_model")
 
         except Exception as e:
@@ -94,7 +94,7 @@ class ModelTrainer:
             model_path = self.model_trainer_config.trained_rf_model_file_path
             save_object(file_path=model_path, obj=rf_model)
             Logger().log(f"Trained Random Forest model saved at: {model_path}")
-            
+
             # Find the training score and test score
             train_score = rf_model.score(X_train, y_train)
             test_score = rf_model.score(X_test, y_test)

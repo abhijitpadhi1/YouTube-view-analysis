@@ -14,11 +14,11 @@ def main():
     try:
         data_preparation = PreparationPipeline()
         data_transformation_artifact = data_preparation.run_data_preparation_pipeline()
-        print(f"Data Transformation Artifact: {data_transformation_artifact}")
+        # print(f"Data Transformation Artifact: {data_transformation_artifact}")
 
         feature_impact_model_training_pipeline = FeatureImpactModelTrainingPipeline(data_transformation_artifact)
         model_trainer_artifact = feature_impact_model_training_pipeline.run_feature_impact_model_training_pipeline()
-        print(f"Model Trainer Artifact: {model_trainer_artifact}")
+        # print(f"Model Trainer Artifact: {model_trainer_artifact}")
 
     except Exception as e:
         err = CustomException(str(e), sys)
